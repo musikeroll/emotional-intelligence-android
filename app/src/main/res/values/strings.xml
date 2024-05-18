@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Coding Challenge</string>
+
+
+    <!-- Content Description -->
+    <string name="condes_journey_icon">journey icon</string>
+    <string name="condes_account_icon">account icon</string>
+    <string name="condes_activity_image">activity image</string>
+    <string name="condes_level_image">level image</string>
+    <string name="condes_flag_icon">flag icon</string>
+
+</resources>
