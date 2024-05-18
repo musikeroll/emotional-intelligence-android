@@ -4,6 +4,7 @@ import android.content.Context
 import com.roaringapps.codingchallenge.feature.data.local.dao.LevelDao
 import com.roaringapps.codingchallenge.feature.data.local.mapper.EntityMapper
 import com.roaringapps.codingchallenge.feature.data.remote.home.LevelsRepository
+import com.roaringapps.codingchallenge.feature.data.remote.home.api.LevelApiAssets
 import com.roaringapps.codingchallenge.feature.domain.model.EmotionLevels
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -18,43 +19,33 @@ import java.io.InputStream
  * @since    17/05/2024
  */
 class LevelsRepositoryAsset(
-    private val context: Context,
+    private val levelApiAssets: LevelApiAssets,
     private val levelDao: LevelDao
 ) : LevelsRepository {
 
     override fun findAll(): Flow<EmotionLevels> = flow {
-        var inputStream: InputStream? = null
-        try {
-            inputStream = context.assets.open("activities.json")
-            val size = inputStream.available()
 
-            val buffer = ByteArray(size)
-            inputStream.read(buffer)
+        val emotionLevels = levelApiAssets.findAll()
+        if (emotionLevels != null) {
+            emotionLevels.levels.forEach { level ->
+                levelDao.insert(
+                    EntityMapper.toDatabase(level)
+                )
 
-            EmotionLevels.parse(String(buffer))
-                .levels.forEach { level ->
+                level.activities.forEach { activity ->
                     levelDao.insert(
-                        EntityMapper.toDatabase(level)
+                        EntityMapper.toDatabase(activity, level.level)
                     )
-
-                    level.activities.forEach { activity ->
-                        levelDao.insert(
-                            EntityMapper.toDatabase(activity, level.level)
-                        )
-                    }
                 }
+            }
 
             emit(
                 EntityMapper.toDomain(
                     levelDao.findAll()
                 )
             )
-
-        } catch (io: IOException) {
-            Timber.d("Something went wrong: %s", io.message)
+        } else {
             emit(EmotionLevels(emptyList()))
-        } finally {
-            inputStream?.close()
         }
     }.flowOn(Dispatchers.IO)
 }

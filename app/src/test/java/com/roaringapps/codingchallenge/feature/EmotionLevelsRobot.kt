@@ -1,5 +1,7 @@
 package com.roaringapps.codingchallenge.feature
 
+import com.roaringapps.codingchallenge.feature.data.local.entity.relational.LevelActivityRelationalDb
+import com.roaringapps.codingchallenge.feature.data.local.mapper.EntityMapper
 import com.roaringapps.codingchallenge.feature.domain.model.EmotionLevels
 import com.roaringapps.codingchallenge.feature.domain.model.Level
 
@@ -32,6 +34,21 @@ object EmotionLevelsRobot {
                 level = "3",
                 state = "LOCKED",
             )
+        )
+    )
+
+    fun database(): List<LevelActivityRelationalDb> = listOf(
+        LevelActivityRelationalDb(
+            levelDb = EntityMapper.toDatabase(data().levels[0]),
+            activityDbs = emptyList()
+        ),
+        LevelActivityRelationalDb(
+            levelDb = EntityMapper.toDatabase(data().levels[1]),
+            activityDbs = emptyList()
+        ),
+        LevelActivityRelationalDb(
+            levelDb = EntityMapper.toDatabase(data().levels[2]),
+            activityDbs = emptyList()
         )
     )
 }

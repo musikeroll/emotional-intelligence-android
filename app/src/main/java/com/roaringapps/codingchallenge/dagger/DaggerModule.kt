@@ -32,9 +32,9 @@ class DaggerModule {
     @Provides
     @Singleton
     fun provideLevelsRepository(
-        @ApplicationContext appContext: Context,
+        levelApiAssets: LevelApiAssets,
         levelDao: LevelDao,
-    ): LevelsRepository = LevelsRepositoryAsset(appContext, levelDao)
+    ): LevelsRepository = LevelsRepositoryAsset(levelApiAssets, levelDao)
 
     @Provides
     @Singleton
