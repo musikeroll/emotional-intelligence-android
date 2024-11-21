@@ -1,11 +1,11 @@
 [versions]
-agp = "8.4.0"
-kotlin = "1.9.0"
-ksp = "1.9.0-1.0.13"
-coreKtx = "1.13.1"
-androidxLifecycle = "2.8.0"
-activityCompose = "1.9.0"
-composeBom = "2024.05.00"
+agp = "8.6.1"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21"
+coreKtx = "1.15.0"
+androidxLifecycle = "2.8.7"
+activityCompose = "1.9.3"
+composeBom = "2024.11.00"
 
 hiltAndroid = "2.51.1"
 hiltCompiler = "1.2.0"
@@ -17,9 +17,9 @@ okhttp = "4.12.0"
 
 ## UNIT TESTING ##
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-coroutinesTest = "1.6.4"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+coroutinesTest = "1.8.0"
 turbine = "1.1.0"
 truth = "1.4.2"
 mockk = "1.13.1"
@@ -71,3 +71,4 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.dagger.hilt)
 
@@ -9,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.roaringapps.codingchallenge"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.roaringapps.codingchallenge"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
